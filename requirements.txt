@@ -5,4 +5,3 @@ langchain-community>=0.0.19
 langchain-groq>=0.0.6
 groq>=0.32.0
 sentence-transformers
-langchain-community
