@@ -1,6 +1,6 @@
 #--upgrade --ignore-installed
 streamlit
-langchain>=0.0.350
+langchain
 langchain-groq>=0.0.6
 langchain-community>=0.0.19
 groq>=0.32.0
