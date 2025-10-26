@@ -1,19 +1,24 @@
-from langchain_groq import ChatGroq
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_groq import ChatGroq
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
 from config import settings
 
 llm = ChatGroq(
-    api_key=settings.GROQ_API_KEY,
-    model=settings.GROQ_MODEL,
-    temperature=settings.GROQ_TEMPERATURE
+    temperature=0.2,
+    groq_api_key=settings.GROQ_API_KEY,
+    model_name=settings.MODEL_NAME
 )
 
-def query_llm(system_prompt: str, user_prompt: str) -> str:
-    messages = [
-        SystemMessage(content=system_prompt),
-        HumanMessage(content=user_prompt)
-    ]
-    result = llm.invoke(messages)
-    return result.content
+# Add conversational memory
+memory = ConversationBufferMemory(return_messages=True)
+
+conversation = ConversationChain(
+    llm=llm,
+    memory=memory,
+    verbose=True
+)
+
+def query_llm(prompt: str):
+    return conversation.predict(input=prompt)
