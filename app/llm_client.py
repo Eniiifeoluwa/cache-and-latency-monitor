@@ -1,7 +1,7 @@
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from langchain_groq import ChatGroq
-from langchain.chains import LLMChain
+from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 from config import settings
 
@@ -13,7 +13,7 @@ llm = ChatGroq(
 
 memory = ConversationBufferMemory(return_messages=True)
 
-conversation = LLMChain(
+conversation = ConversationChain(
     llm=llm,
     memory=memory,
     verbose=True
