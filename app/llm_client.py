@@ -6,9 +6,9 @@ from langchain.memory import ConversationBufferMemory
 from config import settings
 
 llm = ChatGroq(
-    temperature=0.2,
+    temperature= settings.GROQ_TEMPERATURE,
     groq_api_key=settings.GROQ_API_KEY,
-    model_name=settings.MODEL_NAME
+    model_name=settings.GROQ_MODEL
 )
 
 memory = ConversationBufferMemory(return_messages=True)
