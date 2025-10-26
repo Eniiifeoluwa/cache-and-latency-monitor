@@ -5,4 +5,4 @@ langchain-community>=0.0.19
 groq>=0.32.0
 numpy
 os
-sys
+sentence-transformers
