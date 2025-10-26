@@ -1,6 +1,8 @@
 import threading
 import time
-from .embeddings import EmbeddingEngine
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from embeddings import EmbeddingEngine
 
 class SemanticCache:
     def __init__(self, embedding_model: str, similarity_threshold=0.90, ttl=3600):

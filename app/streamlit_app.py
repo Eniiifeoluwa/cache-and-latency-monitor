@@ -1,8 +1,11 @@
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 import streamlit as st
 import time
-from .cache_manager import SemanticCache
-from .llm_client import query_llm
-from .config import settings
+from cache_manager import SemanticCache
+from llm_client import query_llm
+from config import settings
 
 # Initialize
 if "cache" not in st.session_state:
