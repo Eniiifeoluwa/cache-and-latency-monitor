@@ -1,6 +1,6 @@
 import time
 from langchain_groq import ChatGroq
-from langchain.memory import ConversationBufferMemory
+from langchain_community.memory import ConversationBufferMemory
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableSequence
 from config import settings
