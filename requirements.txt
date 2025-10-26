@@ -1,7 +1,7 @@
-#--upgrade --ignore-installed
-streamlit
-langchain>=0.0.350
-langchain-community>=0.0.19
-langchain-groq>=0.0.6
-groq>=0.32.0
+langchain
+langchain-core
+langchain-community
+langchain-groq
 sentence-transformers
+streamlit
+groq>=0.32.0
