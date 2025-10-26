@@ -1,7 +1,7 @@
-langchain
-langchain-core==0.1.4
-langchain-groq>=0.0.6
-langchain-community>=0.0.19
-sentence-transformers
 streamlit
+langchain
+langchain-core
+langchain-community
+langchain-groq
+sentence-transformers
 groq>=0.32.0
