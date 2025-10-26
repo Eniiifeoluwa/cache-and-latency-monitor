@@ -1,4 +1,4 @@
-langchain==0.0.349
+langchain
 langchain-core==0.1.4
 langchain-groq>=0.0.6
 langchain-community>=0.0.19
