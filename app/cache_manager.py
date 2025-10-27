@@ -2,11 +2,10 @@ import time
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
-from sentence_transformers import SentenceTransformer
-
+from embeddings import EmbeddingEngine
 class SemanticCache:
     def __init__(self, embedding_model="all-MiniLM-L6-v2", similarity_threshold=0.85, ttl=3600):
-        self.model = SentenceTransformer(embedding_model)
+        self.model = EmbeddingEngine(embedding_model)
         self.similarity_threshold = similarity_threshold
         self.ttl = ttl
         self.cache = {}
@@ -14,8 +13,8 @@ class SemanticCache:
     def get_embedding(self, text):
         return self.model.encode(text)
 
-    def _similarity(self, emb1, emb2):
-        return np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
+    # def _similarity(self, emb1, emb2):
+    #     return np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
 
     def get(self, query):
         now = time.time()
@@ -27,7 +26,7 @@ class SemanticCache:
                 del self.cache[key]
 
         for key, entry in self.cache.items():
-            sim = self._similarity(query_emb, entry["embedding"])
+            sim = self.model.cosine_similarity(query_emb, entry["embedding"])
             if sim >= self.similarity_threshold:
                 return entry["response"], sim
         return None, 0.0
