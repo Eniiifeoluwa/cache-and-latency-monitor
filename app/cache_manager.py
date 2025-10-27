@@ -2,7 +2,7 @@ import time
 from embeddings import EmbeddingEngine
 
 class SemanticCache:
-    def __init__(self, embedding_model="all-MiniLM-L6-v2", similarity_threshold=0.85, ttl=3600):
+    def __init__(self, embedding_model="all-MiniLM-L6-v2", similarity_threshold=0.6, ttl=3600):
         self.model = EmbeddingEngine(embedding_model)
         self.similarity_threshold = similarity_threshold
         self.ttl = ttl
