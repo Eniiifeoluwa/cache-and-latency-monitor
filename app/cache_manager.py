@@ -8,15 +8,28 @@ class SemanticCache:
         self.ttl = ttl
         self.cache = {}  # {query: {"response": str, "embedding": np.ndarray, "timestamp": float}}
 
+    # -----------------------------------------------------------------
+    # Public method to get embedding for app display
+    # -----------------------------------------------------------------
+    def get_embedding(self, query: str):
+        """Return the embedding of a query without affecting cache."""
+        return self.model.embed(query)
+
+    # -----------------------------------------------------------------
+    # Internal cleanup
+    # -----------------------------------------------------------------
     def _cleanup(self):
-        """Remove expired cache entries."""
+        """Remove expired cache entries based on TTL."""
         now = time.time()
         expired_keys = [k for k, v in self.cache.items() if now - v["timestamp"] > self.ttl]
         for k in expired_keys:
             del self.cache[k]
 
+    # -----------------------------------------------------------------
+    # Cache operations
+    # -----------------------------------------------------------------
     def get(self, query: str):
-        """Retrieve a cached response if similar enough, else return None."""
+        """Retrieve a cached response if similarity threshold is met."""
         self._cleanup()
         query_emb = self.model.embed(query)
 
@@ -27,7 +40,7 @@ class SemanticCache:
         return None, 0.0
 
     def set(self, query: str, response: str):
-        """Cache a query-response pair with embedding and timestamp."""
+        """Store a query-response pair in cache with embedding and timestamp."""
         self.cache[query] = {
             "response": response,
             "embedding": self.model.embed(query),
@@ -35,6 +48,7 @@ class SemanticCache:
         }
 
     def stats(self):
+        """Return simple cache statistics."""
         return {
             "entries": len(self.cache)
         }

@@ -3,7 +3,8 @@ import numpy as np
 
 class EmbeddingEngine:
     def __init__(self, model_name="all-MiniLM-L6-v2"):
-        self.model = SentenceTransformer(model_name)
+        # Force CPU usage to avoid meta tensor errors
+        self.model = SentenceTransformer(model_name, device="cpu")
 
     def embed(self, text: str) -> np.ndarray:
         """Return a normalized embedding vector for a single text."""
@@ -18,5 +19,5 @@ class EmbeddingEngine:
 
     @staticmethod
     def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
-        """Compute cosine similarity between two vectors."""
+        """Compute cosine similarity between two vectors (assumes normalized)."""
         return float(np.dot(a, b))
