@@ -6,6 +6,6 @@ class Settings:
     GROQ_TEMPERATURE = float(os.getenv("GROQ_TEMPERATURE", "0.2"))
     EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
     CACHE_TTL = 3600
-    SIMILARITY_THRESHOLD = 0.85
+    SIMILARITY_THRESHOLD = 0.6
 
 settings = Settings()
