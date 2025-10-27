@@ -20,7 +20,7 @@ class SemanticCache:
         self._cleanup()
         query_emb = self.model.embed(query)
 
-        for key, entry in self.cache.items():
+        for entry in self.cache.values():
             sim = self.model.cosine_similarity(query_emb, entry["embedding"])
             if sim >= self.similarity_threshold:
                 return entry["response"], sim
